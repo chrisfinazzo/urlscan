@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
@@ -46,14 +46,7 @@ urlscan = "urlscan.__main__:main"
 Homepage = "https://github.com/firecat53/urlscan"
 
 [tool.hatch.version]
-source = "vcs"
-fallback-version = "0.0.0"
-
-[tool.hatch.version.raw-options]
-local_scheme = "no-local-version"
-
-[tool.hatch.build.hooks.vcs]
-version-file = "urlscan/_version.py"
+path = "urlscan/__init__.py"
 
 [tool.hatch.build.targets.wheel.shared-data]
 LICENSE = "share/doc/urlscan/LICENSE"

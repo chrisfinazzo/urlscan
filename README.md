@@ -232,14 +232,23 @@ The follow actions are supported:
 - flake.nix is available for a development shell or building/testing the package
   if desired. `nix develop`
 - To update TLD list: `wget https://data.iana.org/TLD/tlds-alpha-by-domain.txt`
+- The version is hardcoded in `urlscan/__init__.py` (`make version` or
+  `urlscan -V`). Anything else needing a version number reads from there.
 - GitHub Action will upload to TestPyPi on each push to `main`. To create a
-  GitHub and PyPi release, create a new tag (formatting below) and push tags.
+  GitHub and PyPi release, run `make release VERSION=x.y.z`. It bumps
+  `__version__`, refreshes the man page date, commits, and opens an editor for
+  the annotated tag, prefilled with the version as the subject and one bullet
+  per commit since the last tag.
 
-        <tag name on first line>
-        
+        <tag name on first line, prefilled>
+
         * Release note 1
         * Release note 2
         * ...
+
+  Then push the commit and tag: `git push origin main --follow-tags`. The
+  GitHub Action fails the build if a pushed tag does not match `__version__`,
+  so nothing mismatched can reach PyPi.
 
 [1]: http://urwid.org/manual/displayattributes.html#display-attributes  "Urwid display attributes"
 [2]: https://hatch.pypa.io/latest/  "Hatch"
