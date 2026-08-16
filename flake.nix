@@ -42,7 +42,7 @@
       default = pkgs.python3Packages.buildPythonApplication {
         pname = "urlscan";
         version = builtins.head (builtins.match
-          ".*\n__version__ = \"([^\"]+)\".*"
+          ".*__version__ = \"([^\"]+)\".*"
           (builtins.readFile ./urlscan/__init__.py));
         format = "pyproject";
         src = ./.;
